@@ -1,4 +1,4 @@
-package com.pk.electionappserver.electionappserver;
+package com.pk.electionappserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

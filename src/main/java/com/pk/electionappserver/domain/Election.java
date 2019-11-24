@@ -1,4 +1,4 @@
-package com.pk.electionappserver.electionappserver.domain;
+package com.pk.electionappserver.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

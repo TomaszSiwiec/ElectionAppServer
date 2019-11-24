@@ -1,10 +1,9 @@
-package com.pk.electionappserver.electionappserver.repository;
+package com.pk.electionappserver.repository;
 
-import com.pk.electionappserver.electionappserver.domain.User;
+import com.pk.electionappserver.domain.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 

@@ -1,6 +1,5 @@
-package com.pk.electionappserver.electionappserver.domain;
+package com.pk.electionappserver.domain;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity(name = "VotesResults")

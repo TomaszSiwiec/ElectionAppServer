@@ -1,6 +1,6 @@
-package com.pk.electionappserver.electionappserver.repository;
+package com.pk.electionappserver.repository;
 
-import com.pk.electionappserver.electionappserver.domain.ElectoralParty;
+import com.pk.electionappserver.domain.ElectoralParty;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
