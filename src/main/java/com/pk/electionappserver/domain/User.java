@@ -1,7 +1,6 @@
-package com.pk.electionappserver.electionappserver.domain;
+package com.pk.electionappserver.domain;
 
 import lombok.AllArgsConstructor;
-import lombok.Cleanup;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

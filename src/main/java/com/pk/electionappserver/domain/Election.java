@@ -1,4 +1,4 @@
-package com.pk.electionappserver.electionappserver.domain;
+package com.pk.electionappserver.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,20 +9,25 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.time.LocalDate;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@Entity(name = "ELECTORAL_PROGRAMMES")
-public class ElectoralProgramme {
+@Entity(name = "ELECTIONS")
+public class Election {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column(name = "programDescription")
-    private String programDescription;
+    @Column(name = "date")
+    private LocalDate date;
 
-    @Column(name = "electoralParty")
-    private ElectoralParty electoralParty;
+    @Column(name = "electionType")
+    private ElectionType electionType;
+
+    @Column(name = "constituencies")
+    private List<Constituency> constituencies;
 }

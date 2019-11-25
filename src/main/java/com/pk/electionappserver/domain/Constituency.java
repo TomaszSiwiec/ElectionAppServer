@@ -1,4 +1,4 @@
-package com.pk.electionappserver.electionappserver.domain;
+package com.pk.electionappserver.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,8 +14,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@Entity(name = "ELECTORAL_PARTIES")
-public class ElectoralParty {
+@Entity(name = "CONSTITUENCIES")
+public class Constituency {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -27,9 +27,9 @@ public class ElectoralParty {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "candidates")
-    private List<Candidate> candidates;
+    @Column(name = "election")
+    private Election election;
 
-    @Column(name = "electoralProgramme")
-    private ElectoralProgramme electoralProgramme;
+    @Column(name = "electionLists")
+    private List<ElectionList> electionLists;
 }
