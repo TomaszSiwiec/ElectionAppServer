@@ -1,5 +1,7 @@
 package com.pk.electionappserver.domain.dto;
 
+import com.pk.electionappserver.domain.Election;
+import com.pk.electionappserver.domain.ElectionList;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +14,6 @@ import java.util.List;
 @Getter
 @Setter
 public class ConstituencyDto {
-    private Long id;
     private String name;
     private String description;
     private Election election;
