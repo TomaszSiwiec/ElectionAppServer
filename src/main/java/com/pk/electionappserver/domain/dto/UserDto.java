@@ -1,5 +1,7 @@
 package com.pk.electionappserver.domain.dto;
 
+import com.pk.electionappserver.domain.Report;
+import com.pk.electionappserver.domain.VoteResult;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +14,6 @@ import java.util.List;
 @Getter
 @Setter
 public class UserDto {
-    private Long id;
     private String name;
     private String lastname;
     private String addressStreet;

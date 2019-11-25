@@ -1,15 +1,12 @@
 package com.pk.electionappserver.domain.dto;
 
+import com.pk.electionappserver.domain.Candidate;
+import com.pk.electionappserver.domain.Constituency;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.util.List;
 
 @NoArgsConstructor
@@ -17,7 +14,6 @@ import java.util.List;
 @Getter
 @Setter
 public class ElectionListDto {
-    private Long id;
     private String name;
     private String description;
     private Constituency constituency;

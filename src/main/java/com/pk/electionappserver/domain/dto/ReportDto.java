@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class ReportDto {
-    private Long id;
     private String title;
     private LocalDateTime date;
     private String description;
