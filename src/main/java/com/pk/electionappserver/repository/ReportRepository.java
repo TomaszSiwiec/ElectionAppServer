@@ -17,5 +17,5 @@ public interface ReportRepository extends CrudRepository<Report, Integer> {
     @Override
     Report save(Report report);
 
-    void deleteById();
+    void deleteById(long id);
 }

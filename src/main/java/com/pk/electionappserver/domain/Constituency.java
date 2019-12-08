@@ -21,15 +21,11 @@ public class Constituency {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column(name = "name")
     private String name;
 
-    @Column(name = "description")
     private String description;
 
-    @Column(name = "election")
-    private Election election;
-
-    @Column(name = "electionLists")
-    private List<ElectionList> electionLists;
+//    private Election election;
+//
+//    private List<ElectionList> electionLists;
 }

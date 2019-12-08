@@ -14,22 +14,18 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@Entity(name = "VotesResults")
+@Entity(name = "VoteResults")
 public class VoteResult {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column(name = "user")
-    private User user;
+//    private User user;
+//
+//    private Election election;
+//
+//    private Candidate candidate;
 
-    @Column(name = "election")
-    private Election election;
-
-    @Column(name = "candidate")
-    private Candidate candidate;
-
-    @Column(name = "dataTime")
-    private LocalDateTime localDateTime;
+    private LocalDateTime voteTime;
 }

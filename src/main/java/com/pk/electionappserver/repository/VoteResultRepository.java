@@ -12,10 +12,10 @@ public interface VoteResultRepository extends CrudRepository<VoteResult, Integer
     @Override
     List<VoteResult> findAll();
 
-    Optional<VoteResult> findById(Long id);
+    Optional<VoteResult> findById(long id);
 
     @Override
     VoteResult save(VoteResult voteResult);
 
-    void deleteById(Long id);
+    void deleteById(long id);
 }

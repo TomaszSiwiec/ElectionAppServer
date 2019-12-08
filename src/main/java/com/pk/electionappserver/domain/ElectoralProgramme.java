@@ -20,9 +20,7 @@ public class ElectoralProgramme {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column(name = "programDescription")
-    private String programDescription;
+    private String description;
 
-    @Column(name = "electoralParty")
-    private ElectoralParty electoralParty;
+//    private ElectoralParty electoralParty;
 }
