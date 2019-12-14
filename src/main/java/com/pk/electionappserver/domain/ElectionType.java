@@ -18,12 +18,10 @@ import java.util.List;
 public class ElectionType {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
     private String name;
 
-    @Column(name = "elections")
-    private List<Election> elections;
+//    private List<Election> elections;
 }

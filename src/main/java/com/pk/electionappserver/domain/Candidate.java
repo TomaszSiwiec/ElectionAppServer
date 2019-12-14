@@ -17,18 +17,18 @@ import javax.persistence.Id;
 public class Candidate {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
     private String name;
 
-    @Column(name = "lastname")
     private String lastname;
 
-    @Column(name = "electionList")
-    private ElectionList electionList;
+    private String education;
 
-    @Column(name = "electoralParty")
-    private ElectoralParty electoralParty;
+    private String placeOfResidence;
+//
+//    private ElectionList electionList;
+//
+//    private ElectoralParty electoralParty;
 }

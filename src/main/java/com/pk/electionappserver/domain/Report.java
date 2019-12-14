@@ -18,16 +18,14 @@ import java.time.LocalDateTime;
 public class Report {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "title")
     private String title;
 
-    @Column(name = "date")
     private LocalDateTime date;
 
-    @Column(name = "description")
     private String description;
 
+//    private User reporter;
 }

@@ -17,12 +17,10 @@ import javax.persistence.Id;
 public class ElectoralProgramme {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "programDescription")
-    private String programDescription;
+    private String description;
 
-    @Column(name = "electoralParty")
-    private ElectoralParty electoralParty;
+//    private ElectoralParty electoralParty;
 }

@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.math.BigInteger;
 import java.util.List;
 
 @AllArgsConstructor
@@ -18,42 +19,32 @@ import java.util.List;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
     private String name;
 
-    @Column(name = "lastname")
     private String lastname;
 
-    @Column(name = "addressStreet")
-    private String addressStreet;
+    private String street;
 
-    @Column(name = "addressNumber")
-    private String addressNumber;
+    private long number;
 
-    @Column(name = "addressFlatBumber")
-    private String addressFlatBumber;
+    private long flatNumber;
 
-    @Column(name = "addressCity")
-    private String addressCity;
+    private String city;
 
-    @Column(name = "postcode")
     private String postcode;
 
-    @Column(name = "pesel")
     private String pesel;
 
-    @Column(name = "email")
+    private BigInteger idNumber;
+
     private String email;
 
-    @Column(name = "phoneNumber")
     private String phoneNumber;
 
-    @Column(name = "reports")
-    private List<Report> reports;
+//    private List<Report> reports;
 
-    @Column(name = "votesResults")
-    private List<VoteResult> voteResults;
+//    private List<VoteResult> voteResults;
 }

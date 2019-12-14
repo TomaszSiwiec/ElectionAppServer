@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @NoArgsConstructor
@@ -19,15 +20,14 @@ import java.util.List;
 public class Election {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "date")
-    private LocalDate date;
+    private LocalDateTime startDate;
 
-    @Column(name = "electionType")
-    private ElectionType electionType;
+    private LocalDateTime finishDate;
 
-    @Column(name = "constituencies")
-    private List<Constituency> constituencies;
+//    private ElectionType electionType;
+
+//    private List<Constituency> constituencies;
 }

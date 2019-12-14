@@ -12,10 +12,10 @@ public interface UserRepository extends CrudRepository<User, Integer> {
     @Override
     List<User> findAll();
 
-    Optional<User> findById(Long id);
+    Optional<User> findById(long id);
 
     @Override
     User save(User user);
 
-    void deleteById(Long id);
+    void deleteById(long id);
 }

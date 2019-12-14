@@ -12,10 +12,10 @@ public interface ElectionListRepository extends CrudRepository<ElectionList, Int
     @Override
     List<ElectionList> findAll();
 
-    Optional<ElectionList> findById(Long id);
+    Optional<ElectionList> findById(long id);
 
     @Override
     ElectionList save(ElectionList electionList);
 
-    void deleteById(Long id);
+    void deleteById(long id);
 }

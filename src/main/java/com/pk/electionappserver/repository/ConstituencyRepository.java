@@ -12,10 +12,10 @@ public interface ConstituencyRepository extends CrudRepository<Constituency, Int
     @Override
     List<Constituency> findAll();
 
-    Optional<Constituency> findById(Long id);
+    Optional<Constituency> findById(long id);
 
     @Override
     Constituency save(Constituency constituency);
 
-    void deleteById(Long id);
+    void deleteById(long id);
 }
