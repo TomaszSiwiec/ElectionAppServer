@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 public class Report {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
