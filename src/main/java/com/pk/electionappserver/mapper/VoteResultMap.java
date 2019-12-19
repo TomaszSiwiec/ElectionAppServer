@@ -11,31 +11,27 @@ import java.util.stream.Collectors;
 public class VoteResultMap {
     public VoteResult mapToVoteResult(VoteResultDto voteResultDto) {
         return new VoteResult(
-                0L,
+                voteResultDto.getId(),
                 voteResultDto.getUser(),
                 voteResultDto.getElection(),
                 voteResultDto.getCandidate(),
-                voteResultDto.getLocalDateTime()
+                voteResultDto.getVoteTime()
         );
     }
 
     public VoteResultDto mapToVoteResultDto(VoteResult voteResult) {
         return new VoteResultDto(
+                voteResult.getId(),
                 voteResult.getUser(),
                 voteResult.getElection(),
                 voteResult.getCandidate(),
-                voteResult.getLocalDateTime()
+                voteResult.getVoteTime()
         );
     }
 
     public List<VoteResultDto> mapToVoteResultDtoList(List<VoteResult> voteResults) {
         return voteResults.stream()
-                .map(voteResult -> new VoteResultDto(
-                        voteResult.getUser(),
-                        voteResult.getElection(),
-                        voteResult.getCandidate(),
-                        voteResult.getLocalDateTime()
-                ))
+                .map(voteResult -> mapToVoteResultDto(voteResult))
                 .collect(Collectors.toList());
     }
 }

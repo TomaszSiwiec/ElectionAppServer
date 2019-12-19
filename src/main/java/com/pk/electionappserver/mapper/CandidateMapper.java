@@ -11,9 +11,12 @@ import java.util.stream.Collectors;
 public class CandidateMapper {
     public Candidate mapToCandidate(CandidateDto candidateDto) {
         return new Candidate(
-                0L,
+                candidateDto.getId(),
                 candidateDto.getName(),
                 candidateDto.getLastname(),
+                candidateDto.getEducation(),
+                candidateDto.getPlaceOfResidence(),
+                candidateDto.getVoteResult(),
                 candidateDto.getElectionList(),
                 candidateDto.getElectoralParty()
         );
@@ -21,8 +24,12 @@ public class CandidateMapper {
 
     public CandidateDto mapToCandidateDto(Candidate candidate) {
         return new CandidateDto(
+                candidate.getId(),
                 candidate.getName(),
                 candidate.getLastname(),
+                candidate.getEducation(),
+                candidate.getPlaceOfResidence(),
+                candidate.getVoteResult(),
                 candidate.getElectionList(),
                 candidate.getElectoralParty()
         );
@@ -30,11 +37,7 @@ public class CandidateMapper {
 
     public List<CandidateDto> mapToCadidateDtoList(List<Candidate> candidates) {
         return candidates.stream()
-                .map(candidate -> new CandidateDto(
-                        candidate.getName(),
-                        candidate.getLastname(),
-                        candidate.getElectionList(),
-                        candidate.getElectoralParty()))
+                .map(candidate -> mapToCandidateDto(candidate))
                 .collect(Collectors.toList());
     }
 }

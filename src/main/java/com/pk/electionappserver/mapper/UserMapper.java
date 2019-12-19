@@ -11,15 +11,16 @@ import java.util.stream.Collectors;
 public class UserMapper {
     public User mapToUser(UserDto userDto) {
         return new User(
-                0L,
+                userDto.getId(),
                 userDto.getName(),
                 userDto.getLastname(),
-                userDto.getAddressStreet(),
-                userDto.getAddressNumber(),
-                userDto.getAddressFlatBumber(),
-                userDto.getAddressCity(),
+                userDto.getStreet(),
+                userDto.getNumber(),
+                userDto.getFlatNumber(),
+                userDto.getCity(),
                 userDto.getPostcode(),
                 userDto.getPesel(),
+                userDto.getIdNumber(),
                 userDto.getEmail(),
                 userDto.getPhoneNumber(),
                 userDto.getReports(),
@@ -29,14 +30,16 @@ public class UserMapper {
 
     public UserDto mapToUserDto(User user) {
         return new UserDto(
+                user.getId(),
                 user.getName(),
                 user.getLastname(),
-                user.getAddressStreet(),
-                user.getAddressNumber(),
-                user.getAddressFlatBumber(),
-                user.getAddressCity(),
+                user.getStreet(),
+                user.getNumber(),
+                user.getFlatNumber(),
+                user.getCity(),
                 user.getPostcode(),
                 user.getPesel(),
+                user.getIdNumber(),
                 user.getEmail(),
                 user.getPhoneNumber(),
                 user.getReports(),
@@ -46,20 +49,7 @@ public class UserMapper {
 
     public List<UserDto> mapToUserDtoList(List<User> users) {
         return users.stream()
-                .map(user -> new UserDto(
-                        user.getName(),
-                        user.getLastname(),
-                        user.getAddressStreet(),
-                        user.getAddressNumber(),
-                        user.getAddressFlatBumber(),
-                        user.getAddressCity(),
-                        user.getPostcode(),
-                        user.getPesel(),
-                        user.getEmail(),
-                        user.getPhoneNumber(),
-                        user.getReports(),
-                        user.getVoteResults()
-                ))
+                .map(user -> mapToUserDto(user))
                 .collect(Collectors.toList());
     }
 }

@@ -11,8 +11,10 @@ import java.util.stream.Collectors;
 public class ElectionMapper {
     public Election mapToElection(ElectionDto electionDto) {
         return new Election(
-                0L,
-                electionDto.getDate(),
+                electionDto.getId(),
+                electionDto.getStartDate(),
+                electionDto.getFinishDate(),
+                electionDto.getVoteResult(),
                 electionDto.getElectionType(),
                 electionDto.getConstituencies()
         );
@@ -20,7 +22,10 @@ public class ElectionMapper {
 
     public ElectionDto mapToElectionDto(Election election) {
         return new ElectionDto(
-                election.getDate(),
+                election.getId(),
+                election.getStartDate(),
+                election.getFinishDate(),
+                election.getVoteResult(),
                 election.getElectionType(),
                 election.getConstituencies()
         );
@@ -28,10 +33,7 @@ public class ElectionMapper {
 
     public List<ElectionDto> mapToElectionDtoList(List<Election> elections) {
         return elections.stream()
-                .map(election -> new ElectionDto(
-                        election.getDate(),
-                        election.getElectionType(),
-                        election.getConstituencies()))
+                .map(election -> mapToElectionDto(election))
                 .collect(Collectors.toList());
     }
 }

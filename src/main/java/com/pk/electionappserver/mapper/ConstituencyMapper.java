@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class ConstituencyMapper {
     public Constituency mapToConstituency(ConstituencyDto constituencyDto) {
         return new Constituency(
-                0L,
+                constituencyDto.getId(),
                 constituencyDto.getName(),
                 constituencyDto.getDescription(),
                 constituencyDto.getElection(),
@@ -21,6 +21,7 @@ public class ConstituencyMapper {
 
     public ConstituencyDto mapToConstituencyDto(Constituency constituency) {
         return new ConstituencyDto(
+                constituency.getId(),
                 constituency.getName(),
                 constituency.getDescription(),
                 constituency.getElection(),
@@ -30,11 +31,7 @@ public class ConstituencyMapper {
 
     public List<ConstituencyDto> mapToConstituencyDtoList(List<Constituency> constituencies) {
         return constituencies.stream()
-                .map(constituency -> new ConstituencyDto(
-                        constituency.getName(),
-                        constituency.getDescription(),
-                        constituency.getElection(),
-                        constituency.getElectionLists()))
+                .map(constituency -> mapToConstituencyDto(constituency))
                 .collect(Collectors.toList());
     }
 }
