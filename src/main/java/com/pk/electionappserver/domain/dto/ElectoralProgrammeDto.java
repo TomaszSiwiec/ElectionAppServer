@@ -11,6 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ElectoralProgrammeDto {
+    private Long id;
     private String programDescription;
     private ElectoralParty electoralParty;
 }

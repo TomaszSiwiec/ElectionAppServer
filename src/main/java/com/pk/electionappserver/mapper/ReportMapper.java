@@ -11,28 +11,27 @@ import java.util.stream.Collectors;
 public class ReportMapper {
     public Report mapToReport(ReportDto reportDto) {
         return new Report(
-                0L,
+                reportDto.getId(),
                 reportDto.getTitle(),
                 reportDto.getDate(),
-                reportDto.getDescription()
+                reportDto.getDescription(),
+                reportDto.getReporter()
         );
     }
 
     public ReportDto mapToReportDto(Report report) {
         return new ReportDto(
+                report.getId(),
                 report.getTitle(),
                 report.getDate(),
-                report.getDescription()
+                report.getDescription(),
+                report.getReporter()
         );
     }
 
     public List<ReportDto> mapToReportDtoList(List<Report> reports) {
         return reports.stream()
-                .map(report -> new ReportDto(
-                        report.getTitle(),
-                        report.getDate(),
-                        report.getDescription()
-                ))
+                .map(report -> mapToReportDto(report))
                 .collect(Collectors.toList());
     }
 }

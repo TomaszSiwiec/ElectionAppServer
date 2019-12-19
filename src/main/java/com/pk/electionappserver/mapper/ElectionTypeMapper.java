@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class ElectionTypeMapper {
     public ElectionType mapToElectionType(ElectionTypeDto electionTypeDto) {
         return new ElectionType(
-                0L,
+                electionTypeDto.getId(),
                 electionTypeDto.getName(),
                 electionTypeDto.getElections()
         );
@@ -19,6 +19,7 @@ public class ElectionTypeMapper {
 
     public ElectionTypeDto mapToElectionTypeDto(ElectionType electionType) {
         return new ElectionTypeDto(
+                electionType.getId(),
                 electionType.getName(),
                 electionType.getElections()
         );
@@ -26,10 +27,7 @@ public class ElectionTypeMapper {
 
     public List<ElectionTypeDto> mapToElectionTypeDtoList(List<ElectionType> electionTypes) {
         return electionTypes.stream()
-                .map(electionType -> new ElectionTypeDto(
-                        electionType.getName(),
-                        electionType.getElections()
-                ))
+                .map(electionType -> mapToElectionTypeDto(electionType))
                 .collect(Collectors.toList());
     }
 }

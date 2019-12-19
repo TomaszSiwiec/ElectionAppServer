@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class ElectoralPartyMapper {
     public ElectoralParty mapToElectoralParty(ElectoralPartyDto electoralPartyDto) {
         return new ElectoralParty(
-                0L,
+                electoralPartyDto.getId(),
                 electoralPartyDto.getName(),
                 electoralPartyDto.getDescription(),
                 electoralPartyDto.getCandidates(),
@@ -21,6 +21,7 @@ public class ElectoralPartyMapper {
 
     public ElectoralPartyDto mapToElectoralPartyDto(ElectoralParty electoralParty) {
         return new ElectoralPartyDto(
+                electoralParty.getId(),
                 electoralParty.getName(),
                 electoralParty.getDescription(),
                 electoralParty.getCandidates(),
@@ -30,12 +31,7 @@ public class ElectoralPartyMapper {
 
     public List<ElectoralPartyDto> mapToElectoralPartyDtoList(List<ElectoralParty> electoralParties) {
         return electoralParties.stream()
-                .map(electoralParty -> new ElectoralPartyDto(
-                        electoralParty.getName(),
-                        electoralParty.getDescription(),
-                        electoralParty.getCandidates(),
-                        electoralParty.getElectoralProgramme()
-                ))
+                .map(electoralParty -> mapToElectoralPartyDto(electoralParty))
                 .collect(Collectors.toList());
     }
 }

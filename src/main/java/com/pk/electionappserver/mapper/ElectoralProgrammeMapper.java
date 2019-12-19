@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class ElectoralProgrammeMapper {
     public ElectoralProgramme mapToElectoralProgramme(ElectoralProgrammeDto electoralProgrammeDto) {
         return new ElectoralProgramme(
-                0L,
+                electoralProgrammeDto.getId(),
                 electoralProgrammeDto.getProgramDescription(),
                 electoralProgrammeDto.getElectoralParty()
         );
@@ -19,17 +19,15 @@ public class ElectoralProgrammeMapper {
 
     public ElectoralProgrammeDto mapToElectoralProgrammeDto(ElectoralProgramme electoralProgramme) {
         return new ElectoralProgrammeDto(
-                electoralProgramme.getProgramDescription(),
+                electoralProgramme.getId(),
+                electoralProgramme.getDescription(),
                 electoralProgramme.getElectoralParty()
         );
     }
 
     public List<ElectoralProgrammeDto> mapToElectoralProgrammeDtoList(List<ElectoralProgramme> electoralProgrammes) {
         return electoralProgrammes.stream()
-                .map(electoralProgramme -> new ElectoralProgrammeDto(
-                        electoralProgramme.getProgramDescription(),
-                        electoralProgramme.getElectoralParty()
-                ))
+                .map(electoralProgramme -> mapToElectoralProgrammeDto(electoralProgramme))
                 .collect(Collectors.toList());
     }
 }
