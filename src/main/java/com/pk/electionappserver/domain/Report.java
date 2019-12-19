@@ -4,11 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
@@ -27,5 +30,11 @@ public class Report {
 
     private String description;
 
-//    private User reporter;
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(
+            name = "JOIN_USER_VOTERESULTS",
+            joinColumns = {@JoinColumn(name = "VOTERESULT_ID", referencedColumnName = "ID")},
+            inverseJoinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")}
+    )
+    private User reporter;
 }

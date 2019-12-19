@@ -4,12 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.time.LocalDate;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -27,7 +30,23 @@ public class Election {
 
     private LocalDateTime finishDate;
 
-//    private ElectionType electionType;
+    @OneToMany(
+            targetEntity = VoteResult.class,
+            mappedBy = "election",
+            cascade = CascadeType.PERSIST,
+            fetch = FetchType.LAZY
+    )
+    private VoteResult voteResult;
 
-//    private List<Constituency> constituencies;
+    @ManyToOne
+    @JoinColumn(name = "ELECTION_TYPES_ID")
+    private ElectionType electionType;
+
+    @OneToMany(
+            targetEntity = Constituency.class,
+            mappedBy = "election",
+            cascade = CascadeType.PERSIST,
+            fetch = FetchType.LAZY
+    )
+    private List<Constituency> constituencies;
 }

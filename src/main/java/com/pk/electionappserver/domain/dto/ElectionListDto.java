@@ -14,8 +14,13 @@ import java.util.List;
 @Getter
 @Setter
 public class ElectionListDto {
+    private Long id;
+
     private String name;
+
     private String description;
+
     private Constituency constituency;
+
     private List<Candidate> candidates;
 }

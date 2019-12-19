@@ -4,11 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 @NoArgsConstructor
@@ -23,5 +25,11 @@ public class ElectionType {
 
     private String name;
 
-//    private List<Election> elections;
+    @OneToMany(
+            targetEntity = Election.class,
+            mappedBy = "electionType",
+            cascade = CascadeType.PERSIST,
+            fetch = FetchType.LAZY
+    )
+    private List<Election> elections;
 }
