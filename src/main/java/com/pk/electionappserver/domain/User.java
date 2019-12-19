@@ -4,11 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import java.math.BigInteger;
 import java.util.List;
 
@@ -44,7 +49,19 @@ public class User {
 
     private String phoneNumber;
 
-//    private List<Report> reports;
+    @OneToMany(
+            targetEntity = Report.class,
+            mappedBy = "reporter",
+            cascade = CascadeType.PERSIST,
+            fetch = FetchType.LAZY
+    )
+    private List<Report> reports;
 
-//    private List<VoteResult> voteResults;
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(
+            name = "JOIN_USER_VOTERESULTS",
+            joinColumns = {@JoinColumn(name = "USERS_ID", referencedColumnName = "ID")},
+            inverseJoinColumns = {@JoinColumn(name = "VOTERESULTS_ID", referencedColumnName = "ID")}
+    )
+    private List<VoteResult> voteResults;
 }

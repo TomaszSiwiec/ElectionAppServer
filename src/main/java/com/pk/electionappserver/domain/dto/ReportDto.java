@@ -1,5 +1,6 @@
 package com.pk.electionappserver.domain.dto;
 
+import com.pk.electionappserver.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,13 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class ReportDto {
+    private Long id;
+
     private String title;
+
     private LocalDateTime date;
+
     private String description;
+
+    private User reporter;
 }

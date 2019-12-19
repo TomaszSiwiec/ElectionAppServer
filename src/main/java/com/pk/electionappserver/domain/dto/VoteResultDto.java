@@ -15,8 +15,13 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class VoteResultDto {
+    private Long id;
+
     private User user;
+
     private Election election;
+
     private Candidate candidate;
-    private LocalDateTime localDateTime;
+
+    private LocalDateTime voteTime;
 }

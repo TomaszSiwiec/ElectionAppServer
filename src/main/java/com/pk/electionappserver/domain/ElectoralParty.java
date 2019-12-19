@@ -4,11 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import java.util.List;
 
 @NoArgsConstructor
@@ -25,7 +29,15 @@ public class ElectoralParty {
 
     private String description;
 
-//    private List<Candidate> candidates;
+    @OneToMany(
+            targetEntity = Candidate.class,
+            mappedBy = "electoralParty",
+            cascade = CascadeType.PERSIST,
+            fetch = FetchType.LAZY
+    )
+    private List<Candidate> candidates;
 
-//    private ElectoralProgramme electoralProgramme;
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @JoinColumn(name = "ELECTORAL_PROGRAMMES_ID")
+    private ElectoralProgramme electoralProgramme;
 }
