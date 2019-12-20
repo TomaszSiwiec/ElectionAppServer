@@ -1,18 +1,10 @@
 package com.pk.electionappserver.domain.dto;
 
-import com.pk.electionappserver.domain.Report;
-import com.pk.electionappserver.domain.VoteResult;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import java.math.BigInteger;
 import java.util.List;
 
@@ -45,7 +37,7 @@ public class UserDto {
 
     private String phoneNumber;
 
-    private List<Report> reports;
+    private List<ReportDto> reports;
 
-    private List<VoteResult> voteResults;
+    private List<VoteResultDto> voteResults;
 }

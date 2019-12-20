@@ -2,6 +2,7 @@ package com.pk.electionappserver.mapper;
 
 import com.pk.electionappserver.domain.Constituency;
 import com.pk.electionappserver.domain.dto.ConstituencyDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -9,13 +10,20 @@ import java.util.stream.Collectors;
 
 @Component
 public class ConstituencyMapper {
+
+    @Autowired
+    private ElectionMapper electionMapper;
+
+    @Autowired
+    private ElectionListMapper electionListMapper;
+
     public Constituency mapToConstituency(ConstituencyDto constituencyDto) {
         return new Constituency(
                 constituencyDto.getId(),
                 constituencyDto.getName(),
                 constituencyDto.getDescription(),
-                constituencyDto.getElection(),
-                constituencyDto.getElectionLists()
+                electionMapper.mapToElection(constituencyDto.getElection()),
+                electionListMapper.mapToElectionListList(constituencyDto.getElectionLists())
         );
     }
 
@@ -24,14 +32,20 @@ public class ConstituencyMapper {
                 constituency.getId(),
                 constituency.getName(),
                 constituency.getDescription(),
-                constituency.getElection(),
-                constituency.getElectionLists()
+                electionMapper.mapToElectionDto(constituency.getElection()),
+                electionListMapper.mapToElectionListDtoList(constituency.getElectionLists())
         );
     }
 
     public List<ConstituencyDto> mapToConstituencyDtoList(List<Constituency> constituencies) {
         return constituencies.stream()
                 .map(constituency -> mapToConstituencyDto(constituency))
+                .collect(Collectors.toList());
+    }
+
+    public List<Constituency> mapToConstituencyList(List<ConstituencyDto> constituencies) {
+        return constituencies.stream()
+                .map(constituency -> mapToConstituency(constituency))
                 .collect(Collectors.toList());
     }
 }

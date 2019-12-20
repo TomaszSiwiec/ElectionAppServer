@@ -57,11 +57,11 @@ public class User {
     )
     private List<Report> reports;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(
-            name = "JOIN_USER_VOTERESULTS",
-            joinColumns = {@JoinColumn(name = "USERS_ID", referencedColumnName = "ID")},
-            inverseJoinColumns = {@JoinColumn(name = "VOTERESULTS_ID", referencedColumnName = "ID")}
+    @OneToMany(
+            targetEntity = VoteResult.class,
+            mappedBy = "user",
+            cascade = CascadeType.PERSIST,
+            fetch = FetchType.LAZY
     )
     private List<VoteResult> voteResults;
 }

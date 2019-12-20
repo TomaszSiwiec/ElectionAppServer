@@ -1,12 +1,11 @@
 package com.pk.electionappserver.domain.dto;
 
-import com.pk.electionappserver.domain.ElectionList;
-import com.pk.electionappserver.domain.ElectoralParty;
-import com.pk.electionappserver.domain.VoteResult;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,9 +22,9 @@ public class CandidateDto {
 
     private String placeOfResidence;
 
-    private VoteResult voteResult;
+    protected List<VoteResultDto> voteResults;
 
-    private ElectionList electionList;
+    private ElectionListDto electionList;
 
-    private ElectoralParty electoralParty;
+    private ElectoralPartyDto electoralParty;
 }

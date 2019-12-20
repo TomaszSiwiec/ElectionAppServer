@@ -13,7 +13,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -39,7 +41,7 @@ public class VoteResult {
             joinColumns = {@JoinColumn(name = "VOTERESULTS_ID",referencedColumnName = "ID")},
             inverseJoinColumns = {@JoinColumn(name = "CANDIDATES_ID", referencedColumnName = "ID")}
     )
-    private Candidate candidate;
+    private List<Candidate> candidates;
 
     private LocalDateTime voteTime;
 }

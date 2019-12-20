@@ -1,14 +1,12 @@
 package com.pk.electionappserver.domain.dto;
 
-import com.pk.electionappserver.domain.Candidate;
-import com.pk.electionappserver.domain.Election;
-import com.pk.electionappserver.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,11 +15,11 @@ import java.time.LocalDateTime;
 public class VoteResultDto {
     private Long id;
 
-    private User user;
+    private UserDto user;
 
-    private Election election;
+    private ElectionDto election;
 
-    private Candidate candidate;
+    private List<CandidateDto> candidates;
 
     private LocalDateTime voteTime;
 }

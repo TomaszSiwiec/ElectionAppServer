@@ -36,7 +36,7 @@ public class Election {
             cascade = CascadeType.PERSIST,
             fetch = FetchType.LAZY
     )
-    private VoteResult voteResult;
+    private List<VoteResult> voteResults;
 
     @ManyToOne
     @JoinColumn(name = "ELECTION_TYPES_ID")

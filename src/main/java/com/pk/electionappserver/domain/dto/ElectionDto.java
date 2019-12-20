@@ -1,8 +1,5 @@
 package com.pk.electionappserver.domain.dto;
 
-import com.pk.electionappserver.domain.Constituency;
-import com.pk.electionappserver.domain.ElectionType;
-import com.pk.electionappserver.domain.VoteResult;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,9 +19,9 @@ public class ElectionDto {
 
     private LocalDateTime finishDate;
 
-    private VoteResult voteResult;
+    private List<VoteResultDto> voteResults;
 
-    private ElectionType electionType;
+    private ElectionTypeDto electionType;
 
-    private List<Constituency> constituencies;
+    private List<ConstituencyDto> constituencies;
 }

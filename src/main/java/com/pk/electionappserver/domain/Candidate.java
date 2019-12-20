@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -38,7 +39,7 @@ public class Candidate {
             joinColumns = {@JoinColumn(name = "CANDIDATES_ID", referencedColumnName = "ID")},
             inverseJoinColumns = {@JoinColumn(name = "VOTERESULTS_ID",referencedColumnName = "ID")}
     )
-    private VoteResult voteResult;
+    private List<VoteResult> voteResults;
 
     @ManyToOne
     @JoinColumn(name = "ELECTION_LISTS_ID")

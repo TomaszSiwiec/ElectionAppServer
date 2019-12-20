@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
@@ -30,11 +31,7 @@ public class Report {
 
     private String description;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(
-            name = "JOIN_USER_VOTERESULTS",
-            joinColumns = {@JoinColumn(name = "VOTERESULT_ID", referencedColumnName = "ID")},
-            inverseJoinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")}
-    )
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "REPORTERS_ID")
     private User reporter;
 }

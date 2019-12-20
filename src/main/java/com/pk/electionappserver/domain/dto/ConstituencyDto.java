@@ -1,7 +1,5 @@
 package com.pk.electionappserver.domain.dto;
 
-import com.pk.electionappserver.domain.Election;
-import com.pk.electionappserver.domain.ElectionList;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +18,7 @@ public class ConstituencyDto {
 
     private String description;
 
-    private Election election;
+    private ElectionDto election;
 
-    private List<ElectionList> electionLists;
+    private List<ElectionListDto> electionLists;
 }

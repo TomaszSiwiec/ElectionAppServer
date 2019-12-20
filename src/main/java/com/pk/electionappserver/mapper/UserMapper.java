@@ -2,6 +2,7 @@ package com.pk.electionappserver.mapper;
 
 import com.pk.electionappserver.domain.User;
 import com.pk.electionappserver.domain.dto.UserDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -9,6 +10,13 @@ import java.util.stream.Collectors;
 
 @Component
 public class UserMapper {
+
+    @Autowired
+    private ReportMapper reportMapper;
+
+    @Autowired
+    private VoteResultMap voteResultMap;
+
     public User mapToUser(UserDto userDto) {
         return new User(
                 userDto.getId(),
@@ -23,8 +31,8 @@ public class UserMapper {
                 userDto.getIdNumber(),
                 userDto.getEmail(),
                 userDto.getPhoneNumber(),
-                userDto.getReports(),
-                userDto.getVoteResults()
+                reportMapper.mapToReportList(userDto.getReports()),
+                voteResultMap.mapToVoteResultList(userDto.getVoteResults())
         );
     }
 
@@ -42,8 +50,8 @@ public class UserMapper {
                 user.getIdNumber(),
                 user.getEmail(),
                 user.getPhoneNumber(),
-                user.getReports(),
-                user.getVoteResults()
+                reportMapper.mapToReportDtoList(user.getReports()),
+                voteResultMap.mapToVoteResultDtoList(user.getVoteResults())
         );
     }
 

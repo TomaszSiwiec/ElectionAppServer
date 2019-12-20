@@ -2,6 +2,7 @@ package com.pk.electionappserver.mapper;
 
 import com.pk.electionappserver.domain.ElectoralParty;
 import com.pk.electionappserver.domain.dto.ElectoralPartyDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -9,13 +10,20 @@ import java.util.stream.Collectors;
 
 @Component
 public class ElectoralPartyMapper {
+
+    @Autowired
+    private CandidateMapper candidateMapper;
+
+    @Autowired
+    private ElectoralProgrammeMapper electoralProgrammeMapper;
+
     public ElectoralParty mapToElectoralParty(ElectoralPartyDto electoralPartyDto) {
         return new ElectoralParty(
                 electoralPartyDto.getId(),
                 electoralPartyDto.getName(),
                 electoralPartyDto.getDescription(),
-                electoralPartyDto.getCandidates(),
-                electoralPartyDto.getElectoralProgramme()
+                candidateMapper.mapToCadidateList(electoralPartyDto.getCandidates()),
+                electoralProgrammeMapper.mapToElectoralProgramme(electoralPartyDto.getElectoralProgramme())
         );
     }
 
@@ -24,8 +32,8 @@ public class ElectoralPartyMapper {
                 electoralParty.getId(),
                 electoralParty.getName(),
                 electoralParty.getDescription(),
-                electoralParty.getCandidates(),
-                electoralParty.getElectoralProgramme()
+                candidateMapper.mapToCadidateDtoList(electoralParty.getCandidates()),
+                electoralProgrammeMapper.mapToElectoralProgrammeDto(electoralParty.getElectoralProgramme())
         );
     }
 
