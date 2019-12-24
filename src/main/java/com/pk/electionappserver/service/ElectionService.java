@@ -27,4 +27,8 @@ public class ElectionService {
         Candidate candidate = candidateRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         return candidateMapper.mapToCandidateDto(candidate);
     }
+
+    public Candidate createCandidate(CandidateDto candidateDto) {
+        return candidateRepository.save(candidateMapper.mapToCandidate(candidateDto));
+    }
 }
