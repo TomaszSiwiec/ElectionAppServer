@@ -5,6 +5,7 @@ import com.pk.electionappserver.domain.dto.VoteResultDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +22,9 @@ public class VoteResultMap {
     private UserMapper userMapper;
 
     public VoteResult mapToVoteResult(VoteResultDto voteResultDto) {
+        if (voteResultDto == null) {
+            return null;
+        }
         return new VoteResult(
                 voteResultDto.getId(),
                 userMapper.mapToUser(voteResultDto.getUser()),
@@ -31,6 +35,9 @@ public class VoteResultMap {
     }
 
     public VoteResultDto mapToVoteResultDto(VoteResult voteResult) {
+        if (voteResult == null) {
+            return null;
+        }
         return new VoteResultDto(
                 voteResult.getId(),
                 userMapper.mapToUserDto(voteResult.getUser()),
@@ -41,12 +48,18 @@ public class VoteResultMap {
     }
 
     public List<VoteResultDto> mapToVoteResultDtoList(List<VoteResult> voteResults) {
+        if (voteResults == null) {
+            return new ArrayList<>();
+        }
         return voteResults.stream()
                 .map(voteResult -> mapToVoteResultDto(voteResult))
                 .collect(Collectors.toList());
     }
 
     public List<VoteResult> mapToVoteResultList(List<VoteResultDto> voteResults) {
+        if (voteResults == null) {
+            return new ArrayList<>();
+        }
         return voteResults.stream()
                 .map(voteResult -> mapToVoteResult(voteResult))
                 .collect(Collectors.toList());

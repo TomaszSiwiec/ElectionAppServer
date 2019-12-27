@@ -5,6 +5,7 @@ import com.pk.electionappserver.domain.dto.ElectionTypeDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,6 +16,9 @@ public class ElectionTypeMapper {
     private ElectionMapper electionMapper;
 
     public ElectionType mapToElectionType(ElectionTypeDto electionTypeDto) {
+        if (electionTypeDto == null) {
+            return null;
+        }
         return new ElectionType(
                 electionTypeDto.getId(),
                 electionTypeDto.getName(),
@@ -23,6 +27,9 @@ public class ElectionTypeMapper {
     }
 
     public ElectionTypeDto mapToElectionTypeDto(ElectionType electionType) {
+        if (electionType == null) {
+            return null;
+        }
         return new ElectionTypeDto(
                 electionType.getId(),
                 electionType.getName(),
@@ -31,6 +38,9 @@ public class ElectionTypeMapper {
     }
 
     public List<ElectionTypeDto> mapToElectionTypeDtoList(List<ElectionType> electionTypes) {
+        if (electionTypes == null) {
+            return new ArrayList<>();
+        }
         return electionTypes.stream()
                 .map(electionType -> mapToElectionTypeDto(electionType))
                 .collect(Collectors.toList());

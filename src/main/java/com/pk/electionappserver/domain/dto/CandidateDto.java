@@ -22,7 +22,7 @@ public class CandidateDto {
 
     private String placeOfResidence;
 
-    protected List<VoteResultDto> voteResults;
+    private List<VoteResultDto> voteResults;
 
     private ElectionListDto electionList;
 
