@@ -5,6 +5,7 @@ import com.pk.electionappserver.domain.dto.ConstituencyDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,6 +19,9 @@ public class ConstituencyMapper {
     private ElectionListMapper electionListMapper;
 
     public Constituency mapToConstituency(ConstituencyDto constituencyDto) {
+        if (constituencyDto == null) {
+            return null;
+        }
         return new Constituency(
                 constituencyDto.getId(),
                 constituencyDto.getName(),
@@ -28,6 +32,9 @@ public class ConstituencyMapper {
     }
 
     public ConstituencyDto mapToConstituencyDto(Constituency constituency) {
+        if (constituency == null) {
+            return null;
+        }
         return new ConstituencyDto(
                 constituency.getId(),
                 constituency.getName(),
@@ -38,12 +45,18 @@ public class ConstituencyMapper {
     }
 
     public List<ConstituencyDto> mapToConstituencyDtoList(List<Constituency> constituencies) {
+        if (constituencies == null) {
+            return new ArrayList<>();
+        }
         return constituencies.stream()
                 .map(constituency -> mapToConstituencyDto(constituency))
                 .collect(Collectors.toList());
     }
 
     public List<Constituency> mapToConstituencyList(List<ConstituencyDto> constituencies) {
+        if (constituencies == null) {
+            return new ArrayList<>();
+        }
         return constituencies.stream()
                 .map(constituency -> mapToConstituency(constituency))
                 .collect(Collectors.toList());

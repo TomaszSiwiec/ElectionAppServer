@@ -5,6 +5,7 @@ import com.pk.electionappserver.domain.dto.ReportDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,6 +16,9 @@ public class ReportMapper {
     private UserMapper userMapper;
 
     public Report mapToReport(ReportDto reportDto) {
+        if (reportDto == null) {
+            return null;
+        }
         return new Report(
                 reportDto.getId(),
                 reportDto.getTitle(),
@@ -25,6 +29,9 @@ public class ReportMapper {
     }
 
     public ReportDto mapToReportDto(Report report) {
+        if (report == null) {
+            return null;
+        }
         return new ReportDto(
                 report.getId(),
                 report.getTitle(),
@@ -35,12 +42,18 @@ public class ReportMapper {
     }
 
     public List<ReportDto> mapToReportDtoList(List<Report> reports) {
+        if (reports == null) {
+            return new ArrayList<>();
+        }
         return reports.stream()
                 .map(report -> mapToReportDto(report))
                 .collect(Collectors.toList());
     }
 
     public List<Report> mapToReportList(List<ReportDto> reports) {
+        if (reports == null) {
+            return new ArrayList<>();
+        }
         return reports.stream()
                 .map(report -> mapToReport(report))
                 .collect(Collectors.toList());
