@@ -160,8 +160,8 @@ public class ElectionService {
         return electionRepository.save(electionMapper.mapToElection(electionDto));
     }
 
-    public void deleteElection(ElectionDto constituencyDto) {
-        constituencyRepository.deleteById(constituencyDto.getId());
+    public void deleteElection(long electionId) {
+        constituencyRepository.deleteById(electionId);
     }
 
     //ElectionList
@@ -178,8 +178,8 @@ public class ElectionService {
         return electionListRepository.save(electionListMapper.mapToElectionList(electionListDto));
     }
 
-    public void deleteElectionList(ElectionListDto electionListDto) {
-        electionListRepository.deleteById(electionListDto.getId());
+    public void deleteElectionList(long electionListId) {
+        electionListRepository.deleteById(electionListId);
     }
 
     //ElectionType
@@ -196,8 +196,8 @@ public class ElectionService {
         return electionTypeRepository.save(electionTypeMapper.mapToElectionType(electionTypeDto));
     }
 
-    public void deleteElectionType(ElectionTypeDto electionTypeDto) {
-        electionTypeRepository.deleteById(electionTypeDto.getId());
+    public void deleteElectionType(long electionTypeId) {
+        electionTypeRepository.deleteById(electionTypeId);
     }
 
     //ElectoralParty
@@ -214,8 +214,8 @@ public class ElectionService {
         return electoralPartyRepository.save(electoralPartyMapper.mapToElectoralParty(electoralPartyDto));
     }
 
-    public void deleteElectoralParty(ElectoralPartyDto electoralPartyDto) {
-        electoralPartyRepository.deleteById(electoralPartyDto.getId());
+    public void deleteElectoralParty(long electoralPartyId) {
+        electoralPartyRepository.deleteById(electoralPartyId);
     }
 
     //ElectoralProgramme
@@ -232,8 +232,8 @@ public class ElectionService {
         return electoralProgrammeRepository.save(electoralProgrammeMapper.mapToElectoralProgramme(electoralProgrammeDto));
     }
 
-    public void deleteElectoralProgramme(ElectoralProgrammeDto electoralProgrammeDto) {
-        electoralProgrammeRepository.deleteById(electoralProgrammeDto.getId());
+    public void deleteElectoralProgramme(long electoralProgrammeId) {
+        electoralProgrammeRepository.deleteById(electoralProgrammeId);
     }
 
     //Report
@@ -250,8 +250,8 @@ public class ElectionService {
         return reportRepository.save(reportMapper.mapToReport(reportDto));
     }
 
-    public void deleteReport(ReportDto reportDto) {
-        reportRepository.deleteById(reportDto.getId());
+    public void deleteReport(long reportId) {
+        reportRepository.deleteById(reportId);
     }
 
     //User
@@ -268,8 +268,8 @@ public class ElectionService {
         return userRepository.save(userMapper.mapToUser(userDto));
     }
 
-    public void deleteUser(UserDto userDto) {
-        userRepository.deleteById(userDto.getId());
+    public void deleteUser(long userId) {
+        userRepository.deleteById(userId);
     }
 
     //VoteResult
@@ -282,11 +282,11 @@ public class ElectionService {
         return voteResultMap.mapToVoteResultDto(voteResult);
     }
 
-    public VoteResult createUser(VoteResultDto voteResultDto) {
+    public VoteResult createVoteResult(VoteResultDto voteResultDto) {
         return voteResultRepository.save(voteResultMap.mapToVoteResult(voteResultDto));
     }
 
-    public void deleteUser(VoteResultDto voteResultDto) {
-        voteResultRepository.deleteById(voteResultDto.getId());
+    public void deleteVoteResult(long voteResultId) {
+        voteResultRepository.deleteById(voteResultId);
     }
 }
