@@ -211,4 +211,25 @@ public class ElectionController {
     public void createUser(@RequestBody UserDto userDto) {
         service.createUser(userDto);
     }
+
+    //VoteResult
+    @GetMapping(value = "/getVoteResults")
+    public List<VoteResultDto> getVoteResults() {
+        return service.getVoteResults();
+    }
+
+    @GetMapping(value = "/getVoteResult/{voteResultId}")
+    public VoteResultDto getVoteResult(@PathVariable long voteResultId) throws EntityNotFoundException {
+        return service.getVoteResult(voteResultId);
+    }
+
+    @DeleteMapping(value = "/deleteVoteResult/{voteResultId}")
+    public void deleteVoteResult(@PathVariable long voteResultId) {
+        service.deleteVoteResult(voteResultId);
+    }
+
+    @PostMapping(value = "/createVoteResult")
+    public void createVoteResult(@RequestBody VoteResultDto voteResultDto) {
+        service.createVoteResult(voteResultDto);
+    }
 }
