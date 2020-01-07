@@ -1,5 +1,6 @@
 package com.pk.electionappserver.domain.dto;
 
+import com.pk.electionappserver.domain.Education;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,7 @@ public class CandidateDto {
 
     private String lastname;
 
-    private String education;
+    private Education education;
 
     private String placeOfResidence;
 

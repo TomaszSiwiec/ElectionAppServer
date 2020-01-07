@@ -45,8 +45,10 @@ import org.apache.tomcat.util.bcel.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
+@Transactional
 @Service
 public class ElectionService {
 
@@ -239,6 +241,11 @@ public class ElectionService {
     //Report
     public List<ReportDto> getReports() {
         return reportMapper.mapToReportDtoList(reportRepository.findAll());
+    }
+
+    public List<ReportDto> getReportsByUserId(long userId) {
+        User user = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
+        return reportMapper.mapToReportDtoList(user.getReports());
     }
 
     public ReportDto getReport(long id) throws EntityNotFoundException {
