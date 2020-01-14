@@ -177,7 +177,7 @@ public class ElectionController {
     }
 
     @GetMapping(value = "/getReportsByUserId/{userId}")
-    public List<ReportDto> getReportsByUserId(@PathVariable long userId) {
+    public List<ReportDto> getReportsByUserId(@PathVariable long userId) throws EntityNotFoundException {
         return service.getReportsByUserId(userId);
     }
 

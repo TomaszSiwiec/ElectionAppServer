@@ -243,7 +243,7 @@ public class ElectionService {
         return reportMapper.mapToReportDtoList(reportRepository.findAll());
     }
 
-    public List<ReportDto> getReportsByUserId(long userId) {
+    public List<ReportDto> getReportsByUserId(long userId) throws EntityNotFoundException {
         User user = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
         return reportMapper.mapToReportDtoList(user.getReports());
     }
