@@ -1,47 +1,9 @@
 package com.pk.electionappserver.service;
 
-import com.pk.electionappserver.domain.Candidate;
-import com.pk.electionappserver.domain.Constituency;
-import com.pk.electionappserver.domain.Election;
-import com.pk.electionappserver.domain.ElectionList;
-import com.pk.electionappserver.domain.ElectionType;
-import com.pk.electionappserver.domain.ElectoralParty;
-import com.pk.electionappserver.domain.ElectoralProgramme;
-import com.pk.electionappserver.domain.EntityNotFoundException;
-import com.pk.electionappserver.domain.Report;
-import com.pk.electionappserver.domain.User;
-import com.pk.electionappserver.domain.VoteResult;
-import com.pk.electionappserver.domain.dto.CandidateDto;
-import com.pk.electionappserver.domain.dto.ConstituencyDto;
-import com.pk.electionappserver.domain.dto.ElectionDto;
-import com.pk.electionappserver.domain.dto.ElectionListDto;
-import com.pk.electionappserver.domain.dto.ElectionTypeDto;
-import com.pk.electionappserver.domain.dto.ElectoralPartyDto;
-import com.pk.electionappserver.domain.dto.ElectoralProgrammeDto;
-import com.pk.electionappserver.domain.dto.ReportDto;
-import com.pk.electionappserver.domain.dto.UserDto;
-import com.pk.electionappserver.domain.dto.VoteResultDto;
-import com.pk.electionappserver.mapper.CandidateMapper;
-import com.pk.electionappserver.mapper.ConstituencyMapper;
-import com.pk.electionappserver.mapper.ElectionListMapper;
-import com.pk.electionappserver.mapper.ElectionMapper;
-import com.pk.electionappserver.mapper.ElectionTypeMapper;
-import com.pk.electionappserver.mapper.ElectoralPartyMapper;
-import com.pk.electionappserver.mapper.ElectoralProgrammeMapper;
-import com.pk.electionappserver.mapper.ReportMapper;
-import com.pk.electionappserver.mapper.UserMapper;
-import com.pk.electionappserver.mapper.VoteResultMap;
-import com.pk.electionappserver.repository.CandidateRepository;
-import com.pk.electionappserver.repository.ConstituencyRepository;
-import com.pk.electionappserver.repository.ElectionListRepository;
-import com.pk.electionappserver.repository.ElectionRepository;
-import com.pk.electionappserver.repository.ElectionTypeRepository;
-import com.pk.electionappserver.repository.ElectoralPartyRepository;
-import com.pk.electionappserver.repository.ElectoralProgrammeRepository;
-import com.pk.electionappserver.repository.ReportRepository;
-import com.pk.electionappserver.repository.UserRepository;
-import com.pk.electionappserver.repository.VoteResultRepository;
-import org.apache.tomcat.util.bcel.Const;
+import com.pk.electionappserver.domain.*;
+import com.pk.electionappserver.domain.dto.*;
+import com.pk.electionappserver.mapper.*;
+import com.pk.electionappserver.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -86,6 +48,9 @@ public class ElectionService {
     private ElectoralPartyRepository electoralPartyRepository;
 
     @Autowired
+    private CityRepository cityRepository;
+
+    @Autowired
     private ElectoralPartyMapper electoralPartyMapper;
 
     @Autowired
@@ -93,12 +58,6 @@ public class ElectionService {
 
     @Autowired
     private ElectoralProgrammeMapper electoralProgrammeMapper;
-
-    @Autowired
-    private ReportRepository reportRepository;
-
-    @Autowired
-    private ReportMapper reportMapper;
 
     @Autowired
     private UserRepository userRepository;
@@ -111,6 +70,9 @@ public class ElectionService {
 
     @Autowired
     private VoteResultMap voteResultMap;
+
+    @Autowired
+    private CityMapper cityMapper;
 
     //Candidate
     public List<CandidateDto> getCandidates() {
@@ -156,6 +118,18 @@ public class ElectionService {
     public ElectionDto getElection(long id) throws EntityNotFoundException {
         Election election = electionRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         return electionMapper.mapToElectionDto(election);
+    }
+
+    public ElectionDto updateElection(long id, ElectionDto electionDto) throws EntityNotFoundException {
+        Election election = electionRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        election.setConstituencies(constituencyMapper.mapToConstituencyList(electionDto.getConstituencies()));
+        election.setElectionType(electionTypeMapper.mapToElectionType(electionDto.getElectionType()));
+        election.setFinishDate(electionDto.getFinishDate());
+        election.setStartDate(electionDto.getStartDate());
+        election.setElectionName(electionDto.getElectionName());
+        election.setListElectionList(electionListMapper.mapToElectionListList(electionDto.getListElectionList()));
+        election.setActive(electionDto.isActive());
+        return electionMapper.mapToElectionDto(electionRepository.save(election));
     }
 
     public Election createElection(ElectionDto electionDto) {
@@ -238,29 +212,6 @@ public class ElectionService {
         electoralProgrammeRepository.deleteById(electoralProgrammeId);
     }
 
-    //Report
-    public List<ReportDto> getReports() {
-        return reportMapper.mapToReportDtoList(reportRepository.findAll());
-    }
-
-    public List<ReportDto> getReportsByUserId(long userId) throws EntityNotFoundException {
-        User user = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
-        return reportMapper.mapToReportDtoList(user.getReports());
-    }
-
-    public ReportDto getReport(long id) throws EntityNotFoundException {
-        Report report = reportRepository.findById(id).orElseThrow(EntityNotFoundException::new);
-        return reportMapper.mapToReportDto(report);
-    }
-
-    public Report createReport(ReportDto reportDto) {
-        return reportRepository.save(reportMapper.mapToReport(reportDto));
-    }
-
-    public void deleteReport(long reportId) {
-        reportRepository.deleteById(reportId);
-    }
-
     //User
     public List<UserDto> getUsers() {
         return userMapper.mapToUserDtoList(userRepository.findAll());
@@ -295,5 +246,23 @@ public class ElectionService {
 
     public void deleteVoteResult(long voteResultId) {
         voteResultRepository.deleteById(voteResultId);
+    }
+
+    //City
+    public List<CityDto> getCities() {
+        return cityMapper.mapToCityDtoList(cityRepository.findAll());
+    }
+
+    public CityDto getCty(long id) throws EntityNotFoundException {
+        City city = cityRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        return cityMapper.mapToCityDto(city);
+    }
+
+    public City createCity(CityDto cityDto) {
+        return cityRepository.save(cityMapper.mapToCity(cityDto));
+    }
+
+    public void deleteCity(long cityId) {
+        cityRepository.deleteById(cityId);
     }
 }

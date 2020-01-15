@@ -1,5 +1,6 @@
 package com.pk.electionappserver.mapper;
 
+import com.pk.electionappserver.domain.Election;
 import com.pk.electionappserver.domain.ElectionList;
 import com.pk.electionappserver.domain.dto.ElectionListDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ public class ElectionListMapper {
     @Autowired
     private CandidateMapper candidateMapper;
 
+    @Autowired
+    private ElectionMapper electionMapper;
+
     public ElectionList mapToElectionList(ElectionListDto electionListDto) {
         if (electionListDto == null) {
             return null;
@@ -26,6 +30,7 @@ public class ElectionListMapper {
                 electionListDto.getId(),
                 electionListDto.getName(),
                 electionListDto.getDescription(),
+                electionMapper.mapToElection(electionListDto.getElection()),
                 constituencyMapper.mapToConstituency(electionListDto.getConstituency()),
                 candidateMapper.mapToCadidateList(electionListDto.getCandidates())
         );
@@ -39,6 +44,7 @@ public class ElectionListMapper {
                 electionList.getId(),
                 electionList.getName(),
                 electionList.getDescription(),
+                electionMapper.mapToElectionDto(electionList.getElection()),
                 constituencyMapper.mapToConstituencyDto(electionList.getConstituency()),
                 candidateMapper.mapToCadidateDtoList(electionList.getCandidates())
         );

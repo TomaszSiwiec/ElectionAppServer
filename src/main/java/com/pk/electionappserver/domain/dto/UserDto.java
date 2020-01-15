@@ -1,10 +1,13 @@
 package com.pk.electionappserver.domain.dto;
 
+import com.pk.electionappserver.domain.City;
+import com.pk.electionappserver.domain.VoteResult;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.math.BigInteger;
 import java.util.List;
 
@@ -25,8 +28,6 @@ public class UserDto {
 
     private long flatNumber;
 
-    private String city;
-
     private String postcode;
 
     private String pesel;
@@ -37,7 +38,9 @@ public class UserDto {
 
     private String phoneNumber;
 
-    private List<ReportDto> reports;
+    private boolean isAdmin;
+
+    private CityDto city;
 
     private List<VoteResultDto> voteResults;
 }

@@ -19,9 +19,13 @@ public class ElectionDto {
 
     private LocalDateTime finishDate;
 
-    private List<VoteResultDto> voteResults;
-
     private ElectionTypeDto electionType;
+
+    private List<ElectionListDto> listElectionList;
+
+    private boolean isActive;
+
+    private String electionName;
 
     private List<ConstituencyDto> constituencies;
 }
