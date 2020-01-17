@@ -40,4 +40,12 @@ public class Constituency {
             fetch = FetchType.LAZY
     )
     private List<ElectionList> electionLists;
+
+    @OneToMany(
+            targetEntity = City.class,
+            mappedBy = "constituency",
+            cascade = CascadeType.PERSIST,
+            fetch = FetchType.LAZY
+    )
+    private List<City> cityList;
 }

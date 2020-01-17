@@ -21,6 +21,9 @@ public class ElectionMapper {
     @Autowired
     private ConstituencyMapper constituencyMapper;
 
+    @Autowired
+    private ElectionListMapper electionListMapper;
+
     public Election mapToElection(ElectionDto electionDto) {
         if (electionDto == null) {
             return null;
@@ -29,8 +32,10 @@ public class ElectionMapper {
                 electionDto.getId(),
                 electionDto.getStartDate(),
                 electionDto.getFinishDate(),
-                voteResultMap.mapToVoteResultList(electionDto.getVoteResults()),
                 electionTypeMapper.mapToElectionType(electionDto.getElectionType()),
+                electionListMapper.mapToElectionListList(electionDto.getListElectionList()),
+                electionDto.isActive(),
+                electionDto.getElectionName(),
                 constituencyMapper.mapToConstituencyList(electionDto.getConstituencies())
         );
     }
@@ -43,8 +48,10 @@ public class ElectionMapper {
                 election.getId(),
                 election.getStartDate(),
                 election.getFinishDate(),
-                voteResultMap.mapToVoteResultDtoList(election.getVoteResults()),
                 electionTypeMapper.mapToElectionTypeDto(election.getElectionType()),
+                electionListMapper.mapToElectionListDtoList(election.getListElectionList()),
+                election.isActive(),
+                election.getElectionName(),
                 constituencyMapper.mapToConstituencyDtoList(election.getConstituencies())
         );
     }

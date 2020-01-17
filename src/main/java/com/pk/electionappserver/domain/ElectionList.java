@@ -30,6 +30,10 @@ public class ElectionList {
     private String description;
 
     @ManyToOne
+    @JoinColumn(name = "ELECTION_ID")
+    private Election election;
+
+    @ManyToOne
     @JoinColumn(name = "CONSTITUENCY_ID")
     private Constituency constituency;
 

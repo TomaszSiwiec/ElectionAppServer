@@ -7,20 +7,16 @@ import lombok.Setter;
 
 import java.util.List;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-public class ElectionListDto {
-    private Long id;
+public class CityDto {
+    private long id;
 
     private String name;
 
-    private String description;
-
-    private ElectionDto election;
+    private List<UserDto> users;
 
     private ConstituencyDto constituency;
-
-    private List<CandidateDto> candidates;
 }

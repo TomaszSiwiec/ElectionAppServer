@@ -3,6 +3,7 @@ package com.pk.electionappserver.domain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -19,6 +20,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Setter
 @Entity(name = "ELECTIONS")
 public class Election {
 
@@ -30,17 +32,21 @@ public class Election {
 
     private LocalDateTime finishDate;
 
+    @ManyToOne
+    @JoinColumn(name = "ELECTION_TYPES_ID")
+    private ElectionType electionType;
+
     @OneToMany(
-            targetEntity = VoteResult.class,
+            targetEntity = ElectionList.class,
             mappedBy = "election",
             cascade = CascadeType.PERSIST,
             fetch = FetchType.LAZY
     )
-    private List<VoteResult> voteResults;
+    private List<ElectionList> listElectionList;
 
-    @ManyToOne
-    @JoinColumn(name = "ELECTION_TYPES_ID")
-    private ElectionType electionType;
+    private boolean isActive;
+
+    private String electionName;
 
     @OneToMany(
             targetEntity = Constituency.class,

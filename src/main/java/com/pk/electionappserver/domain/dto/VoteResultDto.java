@@ -1,5 +1,8 @@
 package com.pk.electionappserver.domain.dto;
 
+import com.pk.electionappserver.domain.Candidate;
+import com.pk.electionappserver.domain.Election;
+import com.pk.electionappserver.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

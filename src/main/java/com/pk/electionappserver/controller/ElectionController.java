@@ -4,14 +4,7 @@ import com.pk.electionappserver.domain.EntityNotFoundException;
 import com.pk.electionappserver.domain.dto.*;
 import com.pk.electionappserver.service.ElectionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -74,6 +67,11 @@ public class ElectionController {
     @GetMapping(value = "/getElection/{electionId}")
     public ElectionDto getElection(@PathVariable long electionId) throws EntityNotFoundException {
         return service.getElection(electionId);
+    }
+
+    @PutMapping(value = "/updateElection")
+    public ElectionDto updateElection(@PathVariable long electionId, @RequestBody ElectionDto electionDto) throws EntityNotFoundException {
+        return service.updateElection(electionId, electionDto);
     }
 
     @DeleteMapping(value = "/deleteElection/{electionId}")
@@ -168,32 +166,6 @@ public class ElectionController {
     @PostMapping(value = "/createElectoralProgramme")
     public void createElectoralProgramme(@RequestBody ElectoralProgrammeDto electoralProgrammeDto) {
         service.createElectoralProgramme(electoralProgrammeDto);
-    }
-
-    //Report
-    @GetMapping(value = "/getReports")
-    public List<ReportDto> getReports() {
-        return service.getReports();
-    }
-
-    @GetMapping(value = "/getReportsByUserId/{userId}")
-    public List<ReportDto> getReportsByUserId(@PathVariable long userId) throws EntityNotFoundException {
-        return service.getReportsByUserId(userId);
-    }
-
-    @GetMapping(value = "/getReport/{reportId}")
-    public ReportDto getReport(@PathVariable long reportId) throws EntityNotFoundException {
-        return service.getReport(reportId);
-    }
-
-    @DeleteMapping(value = "/deleteReport/{reportId}")
-    public void deleteReport(@PathVariable long reportId) {
-        service.deleteReport(reportId);
-    }
-
-    @PostMapping(value = "/createReport")
-    public void createReport(@RequestBody ReportDto reportDto) {
-        service.createReport(reportDto);
     }
 
     //User

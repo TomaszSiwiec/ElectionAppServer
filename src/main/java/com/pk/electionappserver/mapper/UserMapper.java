@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class UserMapper {
 
     @Autowired
-    private ReportMapper reportMapper;
+    private CityMapper cityMapper;
 
     @Autowired
     private VoteResultMap voteResultMap;
@@ -29,13 +29,13 @@ public class UserMapper {
                 userDto.getStreet(),
                 userDto.getNumber(),
                 userDto.getFlatNumber(),
-                userDto.getCity(),
                 userDto.getPostcode(),
                 userDto.getPesel(),
                 userDto.getIdNumber(),
                 userDto.getEmail(),
                 userDto.getPhoneNumber(),
-                reportMapper.mapToReportList(userDto.getReports()),
+                userDto.isAdmin(),
+                cityMapper.mapToCity(userDto.getCity()),
                 voteResultMap.mapToVoteResultList(userDto.getVoteResults())
         );
     }
@@ -51,13 +51,13 @@ public class UserMapper {
                 user.getStreet(),
                 user.getNumber(),
                 user.getFlatNumber(),
-                user.getCity(),
                 user.getPostcode(),
                 user.getPesel(),
                 user.getIdNumber(),
                 user.getEmail(),
                 user.getPhoneNumber(),
-                reportMapper.mapToReportDtoList(user.getReports()),
+                user.isAdmin(),
+                cityMapper.mapToCityDto(user.getCity()),
                 voteResultMap.mapToVoteResultDtoList(user.getVoteResults())
         );
     }
@@ -68,6 +68,15 @@ public class UserMapper {
         }
         return users.stream()
                 .map(user -> mapToUserDto(user))
+                .collect(Collectors.toList());
+    }
+
+    public List<User> mapToUserList(List<UserDto> users) {
+        if (users == null) {
+            return new ArrayList<>();
+        }
+        return users.stream()
+                .map(user -> mapToUser(user))
                 .collect(Collectors.toList());
     }
 }
