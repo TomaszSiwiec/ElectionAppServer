@@ -5,9 +5,9 @@ import java.io.Serializable;
 public enum Education implements Serializable {
     PODSTAWOWE,
     ZAWODOWE,
-    ŚREDNIE,
+    SREDNIE,
     LICENCJAT,
-    INŻYNIER,
+    INZYNIER,
     MAGISTER,
     DOKTOR,
     PROFESOR;

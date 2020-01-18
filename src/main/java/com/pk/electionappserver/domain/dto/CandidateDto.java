@@ -19,13 +19,7 @@ public class CandidateDto {
 
     private String lastname;
 
-    private Education education;
+    private String education;
 
     private String placeOfResidence;
-
-    private List<VoteResultDto> voteResults;
-
-    private ElectionListDto electionList;
-
-    private ElectoralPartyDto electoralParty;
 }

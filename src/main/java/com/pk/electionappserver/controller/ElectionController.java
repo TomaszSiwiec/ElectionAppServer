@@ -6,6 +6,7 @@ import com.pk.electionappserver.service.ElectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @CrossOrigin(origins = "*")
@@ -22,6 +23,11 @@ public class ElectionController {
         return service.getCandidates();
     }
 
+    @GetMapping(value = "/getCandidatesByPart/{electoralPartyId}")
+    public List<CandidateDto> getCandidatesByParty(@PathVariable long electoralPartyId) {
+        return getCandidatesByParty(electoralPartyId);
+    }
+
     @GetMapping(value = "/getCandidate/{candidateId}")
     public CandidateDto getCandidate(@PathVariable long candidateId) throws EntityNotFoundException {
         return service.getCandidate(candidateId);
@@ -33,8 +39,13 @@ public class ElectionController {
     }
 
     @PostMapping(value = "/createCandidate")
-    public void createCandidate(@RequestBody CandidateDto candidateDto) {
+    public void createCandidate(@Valid CandidateDto candidateDto) {
         service.createCandidate(candidateDto);
+    }
+
+    @GetMapping(value = "/setCandidateElectoralParty/{candidateId}/{electoralPartyId}")
+    public CandidateDto setCandidateElectoralParty(@PathVariable long candidateId, @PathVariable long electoralPartyId) throws EntityNotFoundException {
+        return service.setCandidateElectoralParty(candidateId, electoralPartyId);
     }
 
     //Constituency
@@ -54,7 +65,7 @@ public class ElectionController {
     }
 
     @PostMapping(value = "/createConstituency")
-    public void createConstituency(@RequestBody ConstituencyDto constituencyDto) {
+    public void createConstituency(@Valid ConstituencyDto constituencyDto) {
         service.createConstituency(constituencyDto);
     }
 
@@ -70,7 +81,7 @@ public class ElectionController {
     }
 
     @PutMapping(value = "/updateElection")
-    public ElectionDto updateElection(@PathVariable long electionId, @RequestBody ElectionDto electionDto) throws EntityNotFoundException {
+    public ElectionDto updateElection(@PathVariable long electionId, @Valid ElectionDto electionDto) throws EntityNotFoundException {
         return service.updateElection(electionId, electionDto);
     }
 
@@ -80,7 +91,7 @@ public class ElectionController {
     }
 
     @PostMapping(value = "/createElection")
-    public void createElection(@RequestBody ElectionDto electionDto) {
+    public void createElection(@Valid ElectionDto electionDto) {
         service.createElection(electionDto);
     }
 
@@ -101,7 +112,7 @@ public class ElectionController {
     }
 
     @PostMapping(value = "/createElectionList")
-    public void createElectionList(@RequestBody ElectionListDto electionListDto) {
+    public void createElectionList(@Valid ElectionListDto electionListDto) {
         service.createElectionList(electionListDto);
     }
 
@@ -122,7 +133,7 @@ public class ElectionController {
     }
 
     @PostMapping(value = "/createElectionType")
-    public void createElectionType(@RequestBody ElectionTypeDto electionTypeDto) {
+    public void createElectionType(@Valid ElectionTypeDto electionTypeDto) {
         service.createElectionType(electionTypeDto);
     }
 
@@ -137,13 +148,18 @@ public class ElectionController {
         return service.getElectoralParty(electoralPartyId);
     }
 
+    @GetMapping(value = "/getElectoralPartyByCandidateId/{candidateId}")
+    public ElectoralPartyDto getElectoralPartyByCandidateId(@PathVariable long candidateId) throws EntityNotFoundException {
+        return service.getElectoralPartyByCandidateId(candidateId);
+    }
+
     @DeleteMapping(value = "/deleteElectoralParty/{electoralPartyId}")
     public void deleteElectoralParty(@PathVariable long electoralPartyId) {
         service.deleteElectoralParty(electoralPartyId);
     }
 
     @PostMapping(value = "/createElectoralParty")
-    public void createElectoralParty(@RequestBody ElectoralPartyDto electoralPartyDto) {
+    public void createElectoralParty(@Valid ElectoralPartyDto electoralPartyDto) {
         service.createElectoralParty(electoralPartyDto);
     }
 
@@ -164,7 +180,7 @@ public class ElectionController {
     }
 
     @PostMapping(value = "/createElectoralProgramme")
-    public void createElectoralProgramme(@RequestBody ElectoralProgrammeDto electoralProgrammeDto) {
+    public void createElectoralProgramme(@Valid ElectoralProgrammeDto electoralProgrammeDto) {
         service.createElectoralProgramme(electoralProgrammeDto);
     }
 
@@ -185,7 +201,7 @@ public class ElectionController {
     }
 
     @PostMapping(value = "/createUser")
-    public void createUser(@RequestBody UserDto userDto) {
+    public void createUser(@Valid UserDto userDto) {
         service.createUser(userDto);
     }
 
@@ -206,7 +222,7 @@ public class ElectionController {
     }
 
     @PostMapping(value = "/createVoteResult")
-    public void createVoteResult(@RequestBody VoteResultDto voteResultDto) {
+    public void createVoteResult(@Valid VoteResultDto voteResultDto) {
         service.createVoteResult(voteResultDto);
     }
 }

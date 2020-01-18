@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Transactional
 @Service
@@ -79,6 +80,14 @@ public class ElectionService {
         return candidateMapper.mapToCadidateDtoList(candidateRepository.findAll());
     }
 
+    public List<CandidateDto> getCandidatesByParty(long electoralPartyId) throws EntityNotFoundException {
+        ElectoralParty electoralParty = electoralPartyRepository.findById(electoralPartyId).orElseThrow(EntityNotFoundException::new);
+        List<Candidate> candidates = candidateRepository.findAll().stream()
+                .filter(o -> o.getElectoralParty().getId().equals(electoralParty.getId()))
+                .collect(Collectors.toList());
+        return candidateMapper.mapToCadidateDtoList(candidates);
+    }
+
     public CandidateDto getCandidate(long id) throws EntityNotFoundException {
         Candidate candidate = candidateRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         return candidateMapper.mapToCandidateDto(candidate);
@@ -90,6 +99,12 @@ public class ElectionService {
 
     public void deleteCandidateById(long candidadeId){
         candidateRepository.deleteById(candidadeId);
+    }
+
+    public CandidateDto setCandidateElectoralParty(long candidateId, long electoralPartyId) throws EntityNotFoundException {
+        Candidate candidate = candidateRepository.findById(candidateId).orElseThrow(EntityNotFoundException::new);
+        candidate.setElectoralParty(electoralPartyRepository.findById(electoralPartyId).orElseThrow(EntityNotFoundException::new));
+        return candidateMapper.mapToCandidateDto(candidate);
     }
 
     //Constituency
@@ -183,6 +198,15 @@ public class ElectionService {
 
     public ElectoralPartyDto getElectoralParty(long id) throws EntityNotFoundException {
         ElectoralParty electoralParty = electoralPartyRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        return electoralPartyMapper.mapToElectoralPartyDto(electoralParty);
+    }
+
+    public ElectoralPartyDto getElectoralPartyByCandidateId(long candidateId) throws EntityNotFoundException {
+        Candidate candidate = candidateRepository.findById(candidateId).orElseThrow(EntityNotFoundException::new);
+        if (candidate.getElectoralParty() == null) {
+            return new ElectoralPartyDto();
+        }
+        ElectoralParty electoralParty = candidate.getElectoralParty();
         return electoralPartyMapper.mapToElectoralPartyDto(electoralParty);
     }
 
