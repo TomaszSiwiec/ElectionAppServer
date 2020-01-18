@@ -476,13 +476,15 @@ public class ElectionService {
         cityRepository.deleteById(cityId);
     }
 
-    public Boolean checkLoginData(String login, String password) {
+    public UserDto checkLoginData(String login, String password) {
         List<User> users = userRepository.findAll();
+        User user = null;
         for (User tmp : users) {
             if (tmp.getPesel().equals(login)) {
-                return true;
+                user = tmp;
+                return userMapper.mapToUserDto(user);
             }
         }
-        return false;
+        return null;
     }
 }

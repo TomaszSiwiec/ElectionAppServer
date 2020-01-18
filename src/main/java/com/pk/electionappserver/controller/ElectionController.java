@@ -323,7 +323,7 @@ public class ElectionController {
     }
 
     @GetMapping(value = "/checkLoginData/{login}/{password}")
-    public Boolean checkLoginData(@PathVariable String login, @PathVariable String password) throws EntityNotFoundException {
+    public UserDto checkLoginData(@PathVariable String login, @PathVariable String password) throws EntityNotFoundException {
         return service.checkLoginData(login, password);
     }
 }
