@@ -3,6 +3,7 @@ package com.pk.electionappserver.domain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -18,6 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Setter
 @Entity(name = "ELECTION_LISTS")
 public class ElectionList {
 

@@ -1,7 +1,7 @@
 package com.pk.electionappserver.mapper;
 
-import ch.qos.logback.core.encoder.EchoEncoder;
-import com.pk.electionappserver.domain.*;
+import com.pk.electionappserver.domain.Candidate;
+import com.pk.electionappserver.domain.Education;
 import com.pk.electionappserver.domain.dto.CandidateDto;
 import com.pk.electionappserver.repository.ElectionListRepository;
 import com.pk.electionappserver.repository.ElectoralPartyRepository;
@@ -41,7 +41,7 @@ public class CandidateMapper {
 
         Education education = Education.PODSTAWOWE;
 
-        switch (candidateDto.getEducation().toLowerCase()) {
+        switch (candidateDto.getEducation().toString().toLowerCase()) {
             case "podstawowe":
                 education = Education.PODSTAWOWE;
                 break;
@@ -88,8 +88,11 @@ public class CandidateMapper {
                 candidate.getId(),
                 candidate.getName(),
                 candidate.getLastname(),
-                candidate.getEducation().toString(),
-                candidate.getPlaceOfResidence()
+                candidate.getEducation(),
+                candidate.getPlaceOfResidence(),
+                voteResultMap.mapToVoteResultDtoList(candidate.getVoteResults()),
+                electionListMapper.mapToElectionListDto(candidate.getElectionList()),
+                electoralPartyMapper.mapToElectoralPartyDto(candidate.getElectoralParty())
         );
     }
 

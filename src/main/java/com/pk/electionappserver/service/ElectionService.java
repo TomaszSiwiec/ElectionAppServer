@@ -98,6 +98,18 @@ public class ElectionService {
         return candidateRepository.save(candidateMapper.mapToCandidate(candidateDto));
     }
 
+    public CandidateDto updateCandidate(Long id, CandidateDto candidateDto) throws EntityNotFoundException {
+        Candidate candidate = candidateRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        candidate.setName(candidateDto.getName());
+        candidate.setLastname(candidateDto.getLastname());
+        candidate.setElectoralParty(electoralPartyMapper.mapToElectoralParty(candidateDto.getElectoralPartyDto()));
+        candidate.setEducation(candidateDto.getEducation());
+        candidate.setElectionList(electionListMapper.mapToElectionList(candidateDto.getElectionListDto()));
+        candidate.setPlaceOfResidence(candidateDto.getPlaceOfResidence());
+        candidate.setVoteResults(voteResultMap.mapToVoteResultList(candidateDto.getVoteResultsDto()));
+        return candidateMapper.mapToCandidateDto(candidateRepository.save(candidate));
+    }
+
     public void deleteCandidateById(long candidadeId){
         candidateRepository.deleteById(candidadeId);
     }
@@ -149,6 +161,17 @@ public class ElectionService {
 
     public void deleteConstituencyById(long constituencyId) {
         constituencyRepository.deleteById(constituencyId);
+    }
+
+    public ConstituencyDto updateConstituency(Long id, ConstituencyDto constituencyDto) throws EntityNotFoundException {
+        Constituency constituency = constituencyRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        constituency.setName(constituencyDto.getName());
+        constituency.setCityList(cityMapper.mapToCityList(constituencyDto.getCityList()));
+        constituency.setDescription(constituencyDto.getDescription());
+        constituency.setElection(electionMapper.mapToElection(constituencyDto.getElection()));
+        constituency.setElectionLists(electionListMapper.mapToElectionListList(constituencyDto.getElectionLists()));
+        constituency.setVoteResults(voteResultMap.mapToVoteResultList(constituencyDto.getVoteResultsDto()));
+        return constituencyMapper.mapToConstituencyDto(constituencyRepository.save(constituency));
     }
 
     public ConstituencyDto getConstituencyListByUserCityId(long electionId, long cityId) throws EntityNotFoundException {
@@ -276,6 +299,17 @@ public class ElectionService {
         electionListRepository.deleteById(electionListId);
     }
 
+    public ElectionListDto updateElectionList(Long id, ElectionListDto electionListDto) throws EntityNotFoundException {
+        ElectionList electionList = electionListRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        electionList.setCandidates(candidateMapper.mapToCadidateList(electionListDto.getCandidates()));
+        electionList.setConstituency(constituencyMapper.mapToConstituency(electionListDto.getConstituency()));
+        electionList.setDescription(electionListDto.getDescription());
+        electionList.setElection(electionMapper.mapToElection(electionListDto.getElection()));
+        electionList.setElectoralParty(electoralPartyMapper.mapToElectoralParty(electionListDto.getElectoralPartyDto()));
+        electionList.setName(electionListDto.getName());
+        return electionListMapper.mapToElectionListDto(electionListRepository.save(electionList));
+    }
+
     public List<ElectionListDto> getElectionListByConstituency(long constituencyId) throws EntityNotFoundException {
         Constituency constituency = constituencyRepository.findById(constituencyId).orElseThrow(EntityNotFoundException::new);
         List<ElectionList> electionLists = constituency.getElectionLists();
@@ -307,6 +341,13 @@ public class ElectionService {
         return electionTypeRepository.save(electionTypeMapper.mapToElectionType(electionTypeDto));
     }
 
+    public ElectionTypeDto updateElectionType(Long id, ElectionTypeDto electionTypeDto) throws EntityNotFoundException {
+        ElectionType electionType = electionTypeRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        electionType.setElections(electionMapper.mapToElectionList(electionTypeDto.getElections()));
+        electionType.setName(electionTypeDto.getName());
+        return electionTypeMapper.mapToElectionTypeDto(electionTypeRepository.save(electionType));
+    }
+
     public void deleteElectionType(long electionTypeId) {
         electionTypeRepository.deleteById(electionTypeId);
     }
@@ -336,6 +377,16 @@ public class ElectionService {
 
     public void deleteElectoralParty(long electoralPartyId) {
         electoralPartyRepository.deleteById(electoralPartyId);
+    }
+
+    public ElectoralPartyDto updateElectoralParty(Long id, ElectoralPartyDto electoralPartyDto) throws EntityNotFoundException {
+        ElectoralParty electoralParty = electoralPartyRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        electoralParty.setName(electoralPartyDto.getName());
+        electoralParty.setCandidates(candidateMapper.mapToCadidateList(electoralPartyDto.getCandidates()));
+        electoralParty.setDescription(electoralPartyDto.getDescription());
+        electoralParty.setElectionLists(electionListMapper.mapToElectionListList(electoralPartyDto.getElectionListsDto()));
+        electoralParty.setElectoralProgramme(electoralProgrammeMapper.mapToElectoralProgramme(electoralPartyDto.getElectoralProgramme()));
+        return electoralPartyMapper.mapToElectoralPartyDto(electoralPartyRepository.save(electoralParty));
     }
 
     public List<ElectoralPartyDto> getElectoralPartiesByElectionList() {
@@ -385,6 +436,14 @@ public class ElectionService {
         electoralProgrammeRepository.deleteById(electoralProgrammeId);
     }
 
+    public ElectoralProgrammeDto updateElectoralProgramme(Long id, ElectoralProgrammeDto electoralProgrammeDto) throws EntityNotFoundException {
+        ElectoralProgramme electoralProgramme = electoralProgrammeRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        electoralProgramme.setDescription(electoralProgrammeDto.getProgramDescription());
+        electoralProgramme.setElectoralParty(electoralPartyMapper.mapToElectoralParty(electoralProgrammeDto.getElectoralParty()));
+        return electoralProgrammeMapper.mapToElectoralProgrammeDto(electoralProgrammeRepository.save(electoralProgramme));
+    }
+
+
     //User
     public List<UserDto> getUsers() {
         return userMapper.mapToUserDtoList(userRepository.findAll());
@@ -403,6 +462,24 @@ public class ElectionService {
         userRepository.deleteById(userId);
     }
 
+    public UserDto updateUser(Long id, UserDto userDto) throws EntityNotFoundException {
+        User user = userRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        user.setAdmin(userDto.isAdmin());
+        user.setCity(cityMapper.mapToCity(userDto.getCity()));
+        user.setEmail(userDto.getEmail());
+        user.setFlatNumber(userDto.getFlatNumber());
+        user.setIdNumber(userDto.getIdNumber());
+        user.setLastname(userDto.getLastname());
+        user.setNumber(userDto.getNumber());
+        user.setPassword(userDto.getPassword());
+        user.setPesel(userDto.getPesel());
+        user.setPhoneNumber(userDto.getPhoneNumber());
+        user.setPostcode(userDto.getPostcode());
+        user.setStreet(userDto.getStreet());
+        user.setVoteResults(voteResultMap.mapToVoteResultList(userDto.getVoteResults()));
+        return userMapper.mapToUserDto(userRepository.save(user));
+    }
+
     //VoteResult
     public List<VoteResultDto> getVoteResults() {
         return voteResultMap.mapToVoteResultDtoList(voteResultRepository.findAll());
@@ -419,6 +496,16 @@ public class ElectionService {
 
     public void deleteVoteResult(long voteResultId) {
         voteResultRepository.deleteById(voteResultId);
+    }
+
+    public VoteResultDto updateVoteResult(Long id, VoteResultDto voteResultDto) throws EntityNotFoundException {
+        VoteResult voteResult = voteResultRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        voteResult.setConstituency(constituencyMapper.mapToConstituency(voteResultDto.getConstituencyDto()));
+        voteResult.setCandidates(candidateMapper.mapToCadidateList(voteResultDto.getCandidates()));
+        voteResult.setElection(electionMapper.mapToElection(voteResultDto.getElection()));
+        voteResult.setUser(userMapper.mapToUser(voteResultDto.getUser()));
+        voteResult.setVoteTime(voteResultDto.getVoteTime());
+        return voteResultMap.mapToVoteResultDto(voteResultRepository.save(voteResult));
     }
 
     public VoteResultDto updateVoteResult(long voteResultId, String parameter, String value) throws EntityNotFoundException {
@@ -474,6 +561,14 @@ public class ElectionService {
 
     public void deleteCity(long cityId) {
         cityRepository.deleteById(cityId);
+    }
+
+    public CityDto updateCity(Long id, CityDto cityDto) throws EntityNotFoundException {
+        City city = cityRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        city.setConstituency(constituencyMapper.mapToConstituency(cityDto.getConstituency()));
+        city.setName(cityDto.getName());
+        city.setUsers(userMapper.mapToUserList(cityDto.getUsers()));
+        return cityMapper.mapToCityDto(cityRepository.save(city));
     }
 
     public UserDto checkLoginData(String login, String password) {

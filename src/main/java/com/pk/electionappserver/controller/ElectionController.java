@@ -37,6 +37,11 @@ public class ElectionController {
         service.deleteCandidateById(candidateId);
     }
 
+    @PutMapping(value = "/updateCandidate/{candidateId}")
+    public void updateCandidate(@PathVariable long candidateId, @RequestBody CandidateDto candidateDto) throws EntityNotFoundException {
+        service.updateCandidate(candidateId, candidateDto);
+    }
+
     @PostMapping(value = "/createCandidate")
     public void createCandidate(@RequestBody CandidateDto candidateDto) {
         service.createCandidate(candidateDto);
@@ -77,6 +82,11 @@ public class ElectionController {
     @DeleteMapping(value = "/deleteConstituency/{constituencyId}")
     public void deleteConstituency(@PathVariable long constituencyId) {
         service.deleteConstituencyById(constituencyId);
+    }
+
+    @PutMapping(value = "/updateConstituency/{constituencyId}")
+    public void updateConstituency(@PathVariable long constituencyId, @RequestBody ConstituencyDto constituencyDto) throws EntityNotFoundException {
+        service.updateConstituency(constituencyId, constituencyDto);
     }
 
     @PostMapping(value = "/createConstituency")
@@ -146,6 +156,11 @@ public class ElectionController {
         service.deleteElectionList(electionListId);
     }
 
+    @PutMapping(value = "/updateElectionList/{electionListId}")
+    public void updateElectionList(@PathVariable long electionListId, @RequestBody ElectionListDto electionListDto) throws EntityNotFoundException {
+        service.updateElectionList(electionListId, electionListDto);
+    }
+
     @PostMapping(value = "/createElectionList")
     public void createElectionList(@RequestBody ElectionListDto electionListDto) {
         service.createElectionList(electionListDto);
@@ -182,6 +197,11 @@ public class ElectionController {
         service.deleteElectionType(electionTypeId);
     }
 
+    @PutMapping(value = "/updateElectionType/{electionTypeId}")
+    public void updateElectionType(@PathVariable long electionTypeId, @RequestBody ElectionTypeDto electionTypeDto) throws EntityNotFoundException {
+        service.updateElectionType(electionTypeId, electionTypeDto);
+    }
+
     @PostMapping(value = "/createElectionType")
     public void createElectionType(@RequestBody ElectionTypeDto electionTypeDto) {
         service.createElectionType(electionTypeDto);
@@ -201,6 +221,11 @@ public class ElectionController {
     @DeleteMapping(value = "/deleteElectoralParty/{electoralPartyId}")
     public void deleteElectoralParty(@PathVariable long electoralPartyId) {
         service.deleteElectoralParty(electoralPartyId);
+    }
+
+    @PutMapping(value = "/updateElectoralParty/{electoralPartyId}")
+    public void updateElectoralParty(@PathVariable long electoralPartyId, @RequestBody ElectoralPartyDto electoralPartyDto) throws EntityNotFoundException {
+        service.updateElectoralParty(electoralPartyId, electoralPartyDto);
     }
 
     @PostMapping(value = "/createElectoralParty")
@@ -239,6 +264,11 @@ public class ElectionController {
         service.deleteElectoralProgramme(electoralProgrammeId);
     }
 
+    @PutMapping(value = "/updateElectoralProgramme/{electoralProgrammeId}")
+    public void updateElectoralProgramme(@PathVariable long electoralProgrammeId, @RequestBody ElectoralProgrammeDto electoralProgrammeDto) throws EntityNotFoundException {
+        service.updateElectoralProgramme(electoralProgrammeId, electoralProgrammeDto);
+    }
+
     @PostMapping(value = "/createElectoralProgramme")
     public void createElectoralProgramme(@RequestBody ElectoralProgrammeDto electoralProgrammeDto) {
         service.createElectoralProgramme(electoralProgrammeDto);
@@ -260,6 +290,11 @@ public class ElectionController {
         service.deleteUser(userId);
     }
 
+    @PutMapping(value = "/updateUser/{userId}")
+    public void updateUser(@PathVariable long userId, @RequestBody UserDto userDto) throws EntityNotFoundException {
+        service.updateUser(userId, userDto);
+    }
+
     @PostMapping(value = "/createUser")
     public void createUser(@RequestBody UserDto userDto) {
         service.createUser(userDto);
@@ -279,6 +314,11 @@ public class ElectionController {
     @DeleteMapping(value = "/deleteVoteResult/{voteResultId}")
     public void deleteVoteResult(@PathVariable long voteResultId) {
         service.deleteVoteResult(voteResultId);
+    }
+
+    @PutMapping(value = "/updateVoteResult/{voteResultId}")
+    public void updateVoteResult(@PathVariable long voteResultId, @RequestBody VoteResultDto voteResultDto) throws EntityNotFoundException {
+        service.updateVoteResult(voteResultId, voteResultDto);
     }
 
     @PostMapping(value = "/createVoteResult")
@@ -310,6 +350,11 @@ public class ElectionController {
     @DeleteMapping(value = "/deleteCity/{cityId}")
     public void deleteCity(@PathVariable long cityId) {
         service.deleteCity(cityId);
+    }
+
+    @PutMapping(value = "/updateCity/{cityId}")
+    public void updateCity(@PathVariable long cityId, @RequestBody CityDto cityDto) throws EntityNotFoundException {
+        service.updateCity(cityId, cityDto);
     }
 
     @PostMapping(value = "/createCity")
