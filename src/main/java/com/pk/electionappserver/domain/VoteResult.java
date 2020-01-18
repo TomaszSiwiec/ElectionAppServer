@@ -3,6 +3,7 @@ package com.pk.electionappserver.domain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -20,6 +21,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Setter
 @Entity(name = "VoteResults")
 public class VoteResult {
 
@@ -44,4 +46,7 @@ public class VoteResult {
     private List<Candidate> candidates;
 
     private LocalDateTime voteTime;
+    @ManyToOne
+    @JoinColumn(name = "CONSTITUENCY_ID")
+    private Constituency constituency;
 }

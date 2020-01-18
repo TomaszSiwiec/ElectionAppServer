@@ -43,4 +43,6 @@ public class UserDto {
     private CityDto city;
 
     private List<VoteResultDto> voteResults;
+
+    private String password;
 }

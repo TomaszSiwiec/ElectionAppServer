@@ -53,4 +53,6 @@ public class User {
             fetch = FetchType.LAZY
     )
     private List<VoteResult> voteResults;
+
+    private String password;
 }

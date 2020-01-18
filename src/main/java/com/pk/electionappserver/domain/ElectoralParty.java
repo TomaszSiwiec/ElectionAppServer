@@ -40,4 +40,12 @@ public class ElectoralParty {
     @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinColumn(name = "ELECTORAL_PROGRAMMES_ID")
     private ElectoralProgramme electoralProgramme;
+
+    @OneToMany(
+            targetEntity = ElectionList.class,
+            mappedBy = "electoralParty",
+            cascade = CascadeType.PERSIST,
+            fetch = FetchType.LAZY
+    )
+    private List<ElectionList> electionLists;
 }

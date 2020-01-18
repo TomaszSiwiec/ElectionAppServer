@@ -36,7 +36,8 @@ public class UserMapper {
                 userDto.getPhoneNumber(),
                 userDto.isAdmin(),
                 cityMapper.mapToCity(userDto.getCity()),
-                voteResultMap.mapToVoteResultList(userDto.getVoteResults())
+                voteResultMap.mapToVoteResultList(userDto.getVoteResults()),
+                userDto.getPassword()
         );
     }
 
@@ -58,7 +59,8 @@ public class UserMapper {
                 user.getPhoneNumber(),
                 user.isAdmin(),
                 cityMapper.mapToCityDto(user.getCity()),
-                voteResultMap.mapToVoteResultDtoList(user.getVoteResults())
+                voteResultMap.mapToVoteResultDtoList(user.getVoteResults()),
+                user.getPassword()
         );
     }
 

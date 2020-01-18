@@ -44,4 +44,8 @@ public class ElectionList {
             fetch = FetchType.LAZY
     )
     private List<Candidate> candidates;
+
+    @ManyToOne
+    @JoinColumn(name = "ELECTORAL_PARTY_ID")
+    private ElectoralParty electoralParty;
 }
